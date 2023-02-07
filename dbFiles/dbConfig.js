@@ -1,5 +1,5 @@
 const config = {
-    user: 'codingWithDriss',
+    user: 'codingWith_driss',
     password: 'foo',
     server:'DRISS-DAIF',
     database:'sql tutorial',
