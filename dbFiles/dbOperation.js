@@ -1,11 +1,12 @@
 const   config  = require('./dbConfig'),
         sql     = require('mssql');
 
-const getEmployees = async() => {
+const getEmployees = async(fname) => {
     try {
         let pool = await sql.connect(config);
         let employees = await pool.request()
-        .query(`SELECT * FROM EmployeeDemographics`) 
+            .query(`SELECT * FROM EmployeeDemographics WHERE First_name = '${fname}'`)
+            // .query(`SELECT * FROM EmployeeDemographics`) 
         console.log(employees);
         return employees;
     }

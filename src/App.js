@@ -3,12 +3,12 @@ import React, {useState, /*useEffect*/} from 'react';
 
 function App() {
   const [returnedData, setReturnedData] = useState(['helloo']);
-  const [employee, setEmployee] = useState({EmployeeID: 0, Firstname: '', Lastname: '', Age:0, Gender: ''});
+  const [employee, setEmployee] = useState({Employee_id: 0, First_name: '', Last_name: '', Age:0, Gender: ''});
 
   const setInput = (e) => {
     const {name, value} = e.target;
     console.log(value);
-    if (name === "EmployeeID" || name === "Age") {
+    if (name === "Employee_id" || name === "Age") {
       setEmployee(prevState => ({
         ...prevState,
         [name]: parseInt(value)
@@ -30,7 +30,7 @@ function App() {
         'Accept': 'application/json'
       },
       body: JSON.stringify({
-        name: employee.Firstname
+        name: employee.First_name
       })
     })
     .then(res => res.json())
@@ -42,16 +42,16 @@ function App() {
     <div className="App">
       <input 
         type="number" 
-        name="EmployeeID" 
-        placeholder='EmployeeID' 
+        name="Employee_id" 
+        placeholder='Employee_id' 
         onChange={setInput}/>
       <input 
-        name="Firstname" 
-        placeholder='Firstname' 
+        name="First_name" 
+        placeholder='First_name' 
         onChange={setInput}/>
       <input 
-        name="Lastname" 
-        placeholder='Lastname' 
+        name="Last_name" 
+        placeholder='Last_name' 
         onChange={setInput}/>
       <input 
         type="number" 
@@ -64,11 +64,11 @@ function App() {
         onChange={setInput}/>
       <button onClick={() => fetchData()}> Click</button>
       <button onClick={() => fetchData()}> Create</button>
-      <p>EmployeeID : {employee.EmployeeID}</p>
-      <p>First Name : {employee.Firstname}</p>
-      <p>Last Name :  {employee.Lastname}</p>
-      <p>Age :        {employee.Age}</p>
-      <p>Gender :     {employee.Gender}</p>
+      <p>EmployeeID : {returnedData.Employee_id}</p>
+      <p>First Name : {returnedData.First_name}</p>
+      <p>Last Name :  {returnedData.Last_name}</p>
+      <p>Age :        {returnedData.Age}</p>
+      <p>Gender :     {returnedData.Gender}</p>
     </div>
   );
 }

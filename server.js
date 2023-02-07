@@ -13,10 +13,10 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
 
-app.post('/api', function (req, res){
+app.post('/api', async (req, res) => {
     console.log('Called');
-    
-    res.send({result: 'go away'}); //API Result Back
+    const result = await dbOperation.getEmployees(req.body.name);
+    res.send(result.recordset); //API Result Back
 })
 // const result = await dbOperation.getEmployees(); // res.send(result)
 app.post('/hello', function (req, res){
