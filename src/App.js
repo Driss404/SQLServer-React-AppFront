@@ -14,7 +14,7 @@ function App() {
         [name]: parseInt(value)
       }));
       return;
-    }//if this if runs the code after it skips, because inside the if statment we have a return early, that allow us no longer need the else statment
+    }//if this IF Statment runs the code after it skips, because inside the if statment we have a return early, that allow us no longer need the else statment
     setEmployee(prevState => ({
       ...prevState,
       [name]: value
@@ -22,7 +22,7 @@ function App() {
   }
 
   const fetchData = async () => {
-    console.log(employee)
+    console.log(employee);
     const newData = await fetch('/api', {
       method: 'POST',
       headers: {
@@ -33,7 +33,7 @@ function App() {
         name: employee.Firstname
       })
     })
-    .then(res => res.json());
+    .then(res => res.json())
     console.log(newData);
     setReturnedData(newData[0])
   }

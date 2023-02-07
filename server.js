@@ -13,23 +13,27 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
 
-app.POST('/api', async (req, res)=>{
+app.post('/api', function (req, res){
     console.log('Called');
-    const result = await dbOperation.getEmployees();
-    res.send(result)
+    
+    res.send({result: 'go away'}); //API Result Back
 })
-
+// const result = await dbOperation.getEmployees(); // res.send(result)
 app.post('/hello', function (req, res){
     console.log('Called quit');
     res.send({result: 'OMG HI'})
 })
 
 let Pam = new Employee(1002, 'Pam', 'Beezley', 25, 'Female')
+let Micke = new Employee(1003, 'Micke', 'Muckloskey', 31, 'Male')
+
 
 // console.log(Pam)
 
-// dbOperation.createEmployee(Pam);
-// dbOperation.dropEmployee(1002)
+// dbOperation.getEmployees();
+
+// dbOperation.createEmployee(Micke);
+// dbOperation.dropEmployee(1003)
 
 
 app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));
