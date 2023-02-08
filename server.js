@@ -15,10 +15,17 @@ app.use(cors());
 
 app.post('/api', async (req, res) => {
     console.log('Called');
-    const result = await dbOperation.getEmployees(req.body.name);
+    const result = await dbOperation.getEmployees(req.body.name);   // const result = await dbOperation.getEmployees(); // res.send(result)
     res.send(result.recordset); //API Result Back
 })
-// const result = await dbOperation.getEmployees(); // res.send(result)
+
+//POST property that create the api and requeste the insertEmployee() from dbOperation
+app.post('/api02', async (req, res) => {
+    console.log('Called to ADD');
+    const opeResult = await dbOperation.insertEmployee(req.body.Employee);
+    res.send(opeResult.recordset); //API Result Back
+})
+
 app.post('/hello', function (req, res){
     console.log('Called quit');
     res.send({result: 'OMG HI'})

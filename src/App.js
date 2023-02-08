@@ -1,5 +1,6 @@
 import './App.css';
 import React, {useState, /*useEffect*/} from 'react';
+import axios from 'axios';
 
 function App() {
   const [returnedData, setReturnedData] = useState(['helloo']);
@@ -38,6 +39,22 @@ function App() {
     setReturnedData(newData[0])
   }
 
+  const addData = async() => {
+    console.log(employee);
+    const newData = await fetch('/api02', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        Employee: employee
+      })
+    })
+    .then()
+    // .then(res => res.json())  //API Result Back  // VM321:1 Uncaught (in promise) SyntaxError: Unexpected end of JSON input  /  at App.js:53:1  /  at async addData (App.js:44:1)
+  }
+
   return (
     <div className="App">
       <input 
@@ -62,8 +79,8 @@ function App() {
         name="Gender" 
         placeholder='Gender' 
         onChange={setInput}/>
-      <button onClick={() => fetchData()}> Click</button>
-      <button onClick={() => fetchData()}> Create</button>
+      <span id='btn'><button onClick={() => fetchData()}> Fetch Employee</button>
+      <button onClick={() => addData()}> Create Employee</button></span>
       <p>EmployeeID : {returnedData.Employee_id}</p>
       <p>First Name : {returnedData.First_name}</p>
       <p>Last Name :  {returnedData.Last_name}</p>

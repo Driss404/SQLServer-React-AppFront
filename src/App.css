@@ -5,6 +5,10 @@
   align-content: center;
   text-align: center;
 }
+#btn{
+  display:grid;
+  
+}
 
 .App-logo {
   height: 40vmin;

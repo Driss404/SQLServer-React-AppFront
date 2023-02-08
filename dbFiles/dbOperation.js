@@ -15,14 +15,33 @@ const getEmployees = async(fname) => {
     }
 }
 
+const insertEmployee = async(employee) => {
+    try{
+        // const table = 'EmployeeDemographics'; <<<
+        let pool = await sql.connect(config);
+        let newEmp = await pool.request()
+        .query( `INSERT INTO EmployeeDemographics VALUES(
+            ${employee.Employee_id}, '${employee.First_name}', '${employee.Last_name}', ${employee.Age}, '${employee.Gender}');
+            `)
+
+        console.log(`New Employee have been added to Table EmployeeDemographics, which is :
+            (${employee.Employee_id}, '${employee.First_name}', '${employee.Last_name}', ${employee.Age}, '${employee.Gender}'   ); `)
+
+        return newEmp;
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
 const createEmployee = async(EMPLOYEE) => {
     try {
         let pool = await sql.connect(config);
         let employee = await pool.request()
         .query(`INSERT INTO EmployeeDemographics VALUES
-            (${EMPLOYEE.EmployeeID}, '${EMPLOYEE.Firstname}', '${EMPLOYEE.Lastname}', ${EMPLOYEE.Age}, '${EMPLOYEE.Gender}');
+            (${EMPLOYEE.Employee_id}, '${EMPLOYEE.First_name}', '${EMPLOYEE.Last_name}', ${EMPLOYEE.Age}, '${EMPLOYEE.Gender}');
             `)
-        console.log(`SELF MESS: New Employee added to table EmployeeDemographics which is 
+        console.log(`SELF MESS: New Employee added to table EmployeeDemographics which is :
         (${EMPLOYEE.EmployeeID} -- '${EMPLOYEE.Firstname}' -- '${EMPLOYEE.Lastname}' -- ${EMPLOYEE.Age} -- '${EMPLOYEE.Gender}');`)
 
         return employee;
@@ -55,6 +74,7 @@ const dropEmployee = async(ID) => {
 module.exports = {
     getEmployees,
     createEmployee,
-    dropEmployee
+    dropEmployee,
+    insertEmployee
 };
 
