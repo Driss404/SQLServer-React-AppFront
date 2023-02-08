@@ -4,11 +4,11 @@ const   config  = require('./dbConfig'),
 const getEmployees = async(fname) => {
     try {
         let pool = await sql.connect(config);
-        let employees = await pool.request()
+        let employee = await pool.request()
             .query(`SELECT * FROM EmployeeDemographics WHERE First_name = '${fname}'`)
             // .query(`SELECT * FROM EmployeeDemographics`) 
-        console.log(employees);
-        return employees;
+        console.log(employee);
+        return employee;
     }
     catch(error) {
         console.log(error);
@@ -27,7 +27,7 @@ const insertEmployee = async(employee) => {
         console.log(`New Employee have been added to Table EmployeeDemographics, which is :
             (${employee.Employee_id}, '${employee.First_name}', '${employee.Last_name}', ${employee.Age}, '${employee.Gender}'   ); `)
 
-        return newEmp;
+        return;
     }
     catch(error){
         console.log(error);

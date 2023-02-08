@@ -1,5 +1,5 @@
 const express = require('express'),
-      dbOperation = require('./dbFiles/dbOperation'),
+      dbOperations = require('./dbFiles/dbOperations'),
       Employee = require('./dbFiles/employee'),
       cors    = require('cors');
 
@@ -13,17 +13,17 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
 
-app.post('/api', async (req, res) => {
-    console.log('Called');
-    const result = await dbOperation.getEmployees(req.body.name);   // const result = await dbOperation.getEmployees(); // res.send(result)
+app.post('/api01', async (req, res) => {
+    console.log('Called to fetch');
+    const result = await dbOperations.getEmployees(req.body.name);   // const result = await dbOperations.getEmployees(); // res.send(result)
     res.send(result.recordset); //API Result Back
 })
 
-//POST property that create the api and requeste the insertEmployee() from dbOperation
 app.post('/api02', async (req, res) => {
     console.log('Called to ADD');
-    const opeResult = await dbOperation.insertEmployee(req.body.Employee);
-    res.send(opeResult.recordset); //API Result Back
+    await dbOperations.insertEmployee(req.body); // wait to insert the employee into the table
+    const result = await dbOperations.getEmployees(req.body.First_name); // wait to get the employees from the table then store it in result
+    res.send(result.recordset); //send back the result to UI component
 })
 
 app.post('/hello', function (req, res){
@@ -37,10 +37,10 @@ let Micke = new Employee(1003, 'Micke', 'Muckloskey', 31, 'Male')
 
 // console.log(Pam)
 
-// dbOperation.getEmployees();
+// dbOperations.getEmployees();
 
-// dbOperation.createEmployee(Micke);
-// dbOperation.dropEmployee(1003)
+// dbOperations.createEmployee(Micke);
+// dbOperations.dropEmployee(1003)
 
 
 app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));
